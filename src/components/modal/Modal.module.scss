@@ -1,0 +1,95 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1500;
+}
+
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background-color: #eeeeee;
+  color: #373a40;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 20px;
+  text-align: center;
+  transform: scale(0.9);
+  transition: transform 0.225s ease;
+}
+
+.overlay.open .modal {
+  transform: scale(1);
+}
+
+.header {
+  border-bottom: 1px solid #686d76;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.footer {
+  border-top: 1px solid #686d76;
+  padding-top: 10px;
+}
+
+button {
+  background-color: #dc5f00;
+  color: #eeeeee;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c94c00;
+}
+
+@keyframes show-modal {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes hide-modal {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+.modal {
+  animation: show-modal 0.525s ease-in-out;
+}
+
+.modal.hide {
+  animation: hide-modal 0.45s ease-in-out;
+}

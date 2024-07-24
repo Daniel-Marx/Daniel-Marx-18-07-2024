@@ -1,0 +1,58 @@
+.headerWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 10vh;
+  background-color: #686d76;
+  padding: 1rem;
+}
+
+.title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 33%;
+
+  color: #dc5f00;
+  font-size: 24px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+
+.headerDayNightWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 33%;
+}
+
+.headerHomeFavesWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 33%;
+}
+
+.navButton {
+  background-color: #eeeeee;
+  border: none;
+  border-radius: 8px;
+  color: #686d76;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 0.2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: #373a40;
+    color: #eeeeee;
+  }
+}
+
+.selected {
+  background-color: #dc5f00;
+  color: #373a40;
+}

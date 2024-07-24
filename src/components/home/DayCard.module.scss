@@ -1,0 +1,37 @@
+.dayCardWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+
+  flex: 1;
+
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  height: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.date {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.iconPhrase {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.temp {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.precipitation {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
