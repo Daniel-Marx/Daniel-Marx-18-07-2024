@@ -262,6 +262,13 @@ const Home = (props) => {
         <Loader />
       ) : (
         <div className={s.homeMainWrapper}>
+          {!isLoading && !currentConditions && !fiveDayForecast && (
+            <div className={s.noFavoritesMessage}>
+              Unfortunately we are unable to process your request at the moment.
+              Please try again at a later time.
+            </div>
+          )}
+
           {currentConditions && (
             <div className={s.homeTop}>
               <div className={s.homeTopLeft}>
