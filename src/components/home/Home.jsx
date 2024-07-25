@@ -20,7 +20,7 @@ const Home = (props) => {
   const pexelsApiKey = process.env.REACT_APP_PEXELS_API_KEY;
   const accuweatherApiKey = process.env.REACT_APP_ACCUWEATHER_API_KEY;
   const [city, setCity] = useState("");
-  const [cityName, setCityName] = useState("Tel Aviv");
+  const [cityName, setCityName] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
   const [noSuggestionsFound, setNoSuggestionsFound] = useState(true);
@@ -40,7 +40,7 @@ const Home = (props) => {
 
       try {
         const response = await axios.get(
-          `http://dataservice.accuweather.com/locations/v1/cities/autocomplete`,
+          `https://dataservice.accuweather.com/locations/v1/cities/autocomplete`,
           {
             params: {
               apikey: accuweatherApiKey,
@@ -60,7 +60,6 @@ const Home = (props) => {
       } catch (error) {
         console.error("Error fetching autocomplete suggestions", error);
         setAutocompleteSuggestions([]);
-        openModal();
       }
     };
 
@@ -74,12 +73,12 @@ const Home = (props) => {
   const handleSearch = async () => {
     fetchBackgroundImage();
     setIsLoading(true);
-    if (searchValue) setCityName(searchValue);
 
-    if (cityKey)
+    if (cityKey) {
+      if (searchValue) setCityName(searchValue);
       try {
         const response = await axios.get(
-          `http://dataservice.accuweather.com/currentconditions/v1/${cityKey}`,
+          `https://dataservice.accuweather.com/currentconditions/v1/${cityKey}`,
           {
             params: {
               apikey: accuweatherApiKey,
@@ -89,8 +88,9 @@ const Home = (props) => {
           }
         );
 
-        if (response.data) setCurrentConditions(response.data[0]);
-        else {
+        if (response.data) {
+          setCurrentConditions(response.data[0]);
+        } else {
           setCurrentConditions("");
         }
       } catch (error) {
@@ -98,28 +98,29 @@ const Home = (props) => {
         openModal();
       }
 
-    try {
-      const useMetric = unitType === "Metric";
-      const response = await axios.get(
-        `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}`,
-        {
-          params: {
-            apikey: accuweatherApiKey,
-            details: false,
-            language: "en-us",
-            metric: useMetric,
-          },
+      try {
+        const useMetric = unitType === "Metric";
+        const response = await axios.get(
+          `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}`,
+          {
+            params: {
+              apikey: accuweatherApiKey,
+              details: false,
+              language: "en-us",
+              metric: useMetric,
+            },
+          }
+        );
+        if (response.data) setFiveDayForecast(response.data);
+        else {
+          setFiveDayForecast("");
         }
-      );
-      if (response.data) setFiveDayForecast(response.data);
-      else {
-        setFiveDayForecast("");
+      } catch (error) {
+        console.error("Error fetching five day forecast:", error);
+        openModal();
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error("Error fetching five day forecast:", error);
-      openModal();
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -288,7 +289,7 @@ const Home = (props) => {
                   )}
                 </div>
                 <div className={s.weatherDetails}>
-                  <div className={s.cityName}>{cityName}</div>
+                  {cityName && <div className={s.cityName}>{cityName}</div>}
 
                   <div className={s.topLeftTemp}>
                     <span className={s.tempValue}>
